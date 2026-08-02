@@ -522,6 +522,11 @@ function rate(rating, c) {
   if (ok) right++; else wrong++;
   if (navigator.vibrate) navigator.vibrate(ok ? 10 : [30, 40, 30]);
   commitLocal(c, rating);
+  // "Again" is a same-session retry, not merely a promise to show the card
+  // at some later scheduled launch. Put it at the back so there is spacing
+  // from the other cards, and keep doing that until it receives a passing
+  // self-rating.
+  if (rating === 'again') queue.push(c);
   next();
 }
 
