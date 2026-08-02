@@ -144,6 +144,7 @@
     <button onclick="start('all')">Practice</button>
   </div>
   <button id="b-notif" onclick="enablePush()" style="display:none">Enable notifications</button>
+  <button onclick="reconnect()"><small>Change GitHub connection</small></button>
   <div class="status" id="h-status"></div>
 </div>
 
@@ -448,6 +449,13 @@ function renderHome() {
   }
 }
 function goHome() { show('home'); renderHome(); flushReviews(); }
+function reconnect() {
+  TOKEN = '';
+  localStorage.removeItem('ghtok');
+  $('tok').value = '';
+  $('s-err').textContent = '';
+  show('setup');
+}
 
 /* -------------------------------- drill --------------------------------- */
 function start(mode) {
