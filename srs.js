@@ -88,7 +88,9 @@ const SRS = {
     return out;
   },
 
-  baseOf(id) { return id.slice(0, id.lastIndexOf(':')); },
+  baseOf(id) {
+    return /:(ar2en|en2ar)$/.test(id) ? id.slice(0, id.lastIndexOf(':')) : id;
+  },
 
   // Cards tagged deliver:"table" are a paradigm the grid and the matching
   // round teach as a system. They keep their schedule and their history --
