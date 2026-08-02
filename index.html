@@ -153,6 +153,7 @@
   <div id="prompt"></div>
   <div class="opts" id="opts"></div>
   <div id="foot"></div>
+  <button class="session-back" onclick="leaveSession()">Back to home</button>
 </div>
 
 <div id="tables" class="screen">
@@ -469,6 +470,15 @@ function start(mode) {
   show('drill'); render();
 }
 function startCrank() { crankEnd = Date.now() + 30 * 60000; start('due'); }
+
+function leaveSession() {
+  // Ratings are committed card-by-card, so leaving never loses completed
+  // work. Only the in-memory remainder of this particular session is closed.
+  crankEnd = 0;
+  locked = true;
+  flushReviews();
+  goHome();
+}
 
 function render() {
   const c = queue[idx];
